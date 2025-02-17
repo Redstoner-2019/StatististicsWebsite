@@ -13,6 +13,9 @@ export class AppComponent {
   params: any | null = {};
   changeThemeButtonText = "Change Theme";
 
+  showLogoutButton = true;
+  logoutButtonText = "Login";
+
   constructor(private themeService: ThemeService, private route: ActivatedRoute, private router: Router) {
 
   }
@@ -33,6 +36,13 @@ export class AppComponent {
     let theme = localStorage.getItem("theme");
     if(theme == null) theme = "lofi";
     this.switchTheme(theme);
+  }
+
+  logout(){
+    this.router.navigate(["/login"]);
+
+    localStorage.setItem('token', "");
+    localStorage.setItem('username', "");
   }
 
   switchTheme(theme:string){

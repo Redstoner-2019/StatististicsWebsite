@@ -52,6 +52,7 @@ export class TwofactorComponent implements OnInit{
     this.http.post(this.apiUrl, request).subscribe(response => {
       const result: any = response;
       console.log(result);
+      this.router.navigate(["dashboard"]);
     });
   }
 
