@@ -1,0 +1,18 @@
+<div class="center">
+    <div class="form twoFactorForm">
+        <form class="input-group">
+            <h2 class="white center">Authentication</h2>
+            <div class="input-group">
+                <label>Please enter your 2-FA code sent to your email.</label>
+                <input class="grayPlaceholder" type="text" id ="username" placeholder="2-FA" formControlName="code" #code required>
+            </div>
+            <div class="input-group">
+                <br>
+                <button type="button" (click)="authenticate(code.value)" [ngClass]="{'disabled': isDisabled}">{{authenticateButtonText}}</button>
+            </div>
+            <div class="input-group">
+                <label id="error" class="red" [ngClass]="{'hidden': !isError}">{{errorText}}</label>
+            </div>
+        </form>
+    </div>
+</div>

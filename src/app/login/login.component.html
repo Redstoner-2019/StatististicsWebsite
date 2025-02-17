@@ -1,0 +1,23 @@
+<div class="center">
+    <div class="form loginForm">
+        <form (submit)="login(username.value, password.value)" class="input-group">
+            <h2 class="center">Login</h2>
+            <div class="input-group">
+                <label>Username</label>
+                <input class="" type="text" id ="username" placeholder="Username" #username required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input class="" type="password" id="password" placeholder="Password" #password required>
+            </div>
+            <div class="input-group">
+                <br>
+                <button type="button" (click)="login(username.value, password.value)" [ngClass]="{'disabled': isDisabled}">{{loginButtonText}}</button>
+            </div>
+            <div class="input-group">
+                <label id="error" class="red" [ngClass]="{'hidden': !isError}">{{errorText}}</label>
+            </div>
+            <p>Don't have an account? <a href="signup" id="switch-to-signup" class="secondary">Create one</a></p>
+        </form>  
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="center">
+    <div class="form signupForm">
+        <form class="input-group">
+            <h2 class="center">Create Account</h2>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Username" #username required>
+            </div>
+            <div class="input-group">
+                <label>Display Name</label>
+                <input type="text" id="displayname" placeholder="Display Name" #displayname required>
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" id="email" placeholder="E-Mail" #email required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Password"  #password required>
+            </div>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" #confirmpassword required>
+            </div>
+            <div class="input-group">
+                <br>
+                <button type="button" (click)="signUp(username.value, displayname.value, email.value, password.value, confirmpassword.value)" [ngClass]="{'disabled': isDisabled}">{{signupButtonText}}</button>
+            </div>
+            <div class="input-group">
+                <label id="error" class="hidden red" [ngClass]="{'hidden': !isError}">{{errorText}}</label>
+            </div>
+            <p>You have an account? <a href="login" id="switch-to-signup">Login instead</a></p>
+        </form>  
+    </div> 
+</div>

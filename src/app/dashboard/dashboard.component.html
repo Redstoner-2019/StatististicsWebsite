@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="center-horizontal">
+        <div class="form input-group mainBar">
+            <div class="mainBarItems">
+                <button class="buttonText" [ngClass]="{'selected': tab === 'dashboard'}" (click)="switchTab('dashboard')">Dashboard</button>
+                <button class="buttonText" [ngClass]="{'selected': tab === 'games'}" (click)="switchTab('games')">Games</button>
+                <button class="buttonText" [ngClass]="{'selected': tab === 'new runs'}" (click)="switchTab('new runs')">New Runs</button>
+                <button class="buttonText" [ngClass]="{'selected': tab === 'themes'}" (click)="switchTab('themes')">Themes</button>
+            </div>
+        </div>
+    </div>
+    <div class="tab">
+        <app-dashboard-view *ngIf="tab === 'dashboard'"></app-dashboard-view>
+        <app-theme-selector *ngIf="tab === 'themes'"></app-theme-selector>
+    </div>
+</div>
+
+
