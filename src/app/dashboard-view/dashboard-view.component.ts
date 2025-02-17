@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, HostListener, AfterViewInit } from '@
 import { AppComponent } from '../app.component';
 import { GameObjectComponent } from '../game-object/game-object.component';
 import { CommonModule } from '@angular/common';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -30,7 +31,9 @@ export class DashboardViewComponent {
   containerWidth = 0;
 
   ngAfterViewInit() {
-    this.updateVisibleItems();
+    setTimeout(() => {
+      this.updateVisibleItems();
+    }, 250);
   }
 
   @HostListener('window:resize')
