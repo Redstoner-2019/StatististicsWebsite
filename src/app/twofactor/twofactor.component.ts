@@ -49,10 +49,50 @@ export class TwofactorComponent implements OnInit{
     }
     }
 
-    this.http.post(this.apiUrl, request).subscribe(response => {
+    this.http.post(this.apiUrl, request).subscribe((response) => {
       const result: any = response;
-      console.log(result);
-      this.router.navigate(["dashboard"]);
+      switch (result.message) {
+        case "code-expired": {
+          this.isError = true;
+          this.isDisabled = false;
+          this.errorText = "This code has expired. Please retry to login/signup."
+          break;
+        }
+        case "confirm-id-not-found": {
+          this.isError = true;
+          this.isDisabled = false;
+          this.errorText = "This authentication does not exist anymore."
+          break;
+        }
+        case "incorrect-confirmation-code": {
+          this.isError = true;
+          this.isDisabled = false;
+          this.errorText = "This code is incorrect."
+          break;
+        }
+        case "user-created": {
+          console.log(result);
+          localStorage.setItem('token', result.token);
+          this.router.navigate(["dashboard"]);
+          break;
+        }
+        case "success": {
+          console.log(result);
+          localStorage.setItem('token', result.token);
+          this.router.navigate(["dashboard"]);
+          break;
+        }
+        default: {
+          this.isError = true;
+          this.isDisabled = false;
+          this.errorText = "An error has occured. " + result.message;
+          break;
+        }
+      }
+    },
+    (error) => {
+          this.isError = true;
+          this.errorText = "An error has occured " + error;
     });
   }
 
