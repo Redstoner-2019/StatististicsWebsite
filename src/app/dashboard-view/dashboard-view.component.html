@@ -1,1 +1,14 @@
-<p>dashboard-view works!</p>
+<div class="center">
+    <div class="form dashboard">
+        <h2 class="center-horizontal">Most Active Games</h2>
+        <div #containerDiv class="form horizontalItems">
+            <div *ngFor="let game of visibleGames">
+                <app-game-object [name]="game.name" [players]="game.players" [uuid]="game.id"></app-game-object>
+            </div>
+        </div>
+        <h2 class="center-horizontal">Most recent Records</h2>
+        <div class="form">
+
+        </div>
+    </div>
+</div>
