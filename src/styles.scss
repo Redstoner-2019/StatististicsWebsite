@@ -1,1 +1,192 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #222222;
+    --secondary-color: #1a1a1a;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(255, 255, 255, 0.6);
+    --default-button: rgba(0,86, 179,1);
+    --default-button-hover: rgba(0, 86, 179, 0.8);
+    --default-button-disabled: rgba(255, 255, 255, 0.1);
+  }
+
+.lofi-theme {
+    --primary-color: #222222;
+    --secondary-color: #1a1a1a;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(255, 255, 255, 0.6);
+    background-image: url('/lofi-anime.jpg');
+    background-size: cover; 
+}
+  
+.dark-theme {
+    --primary-color: #222222;
+    --secondary-color: #1a1a1a;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(255, 255, 255, 0.6);
+    background-color: var(--primary-color);
+  }
+  
+  .blue-theme {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(0, 0, 0, 0.6);
+    background-color: var(--primary-color);
+  }
+
+  .light-theme {
+    --primary-color: #ffffff;
+    --secondary-color: #c5c5c5;
+    --text-color: #000000;
+    --placeholder-text-color: rgba(0, 0, 0, 0.6);
+    background-color: var(--primary-color);
+  }
+  
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.center-horizontal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+h2 {
+    color: var(--text-color);
+}
+
+p {
+    color: var(--text-color);
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+input::placeholder {
+    color: var(--placeholder-text-color);
+}
+
+button {
+    padding: 10px;
+    background-color: var(--default-button);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.buttonText {
+    padding: 10px;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.buttonText:hover{
+    background-color: rgba($color: #FFFFFF, $alpha: 0.2);
+    backdrop-filter: blur(30px);
+}
+
+.selected{
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+}
+
+button.disabled {
+    background-color: var(--default-button-disabled);
+    color: var(--default-button-disabled);
+}
+
+button.disabled:hover {
+    background-color: var(--default-button-disabled);
+    color: var(--default-button-disabled);
+    cursor: not-allowed;
+}
+
+button:hover {
+    background-color: var(--default-button-hover)
+}
+
+label {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.hidden {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+a {
+    color: var(--text-color);
+}
+
+.white {
+    color: white;
+}
+
+.grayPlaceholder::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.gray {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.red {
+    color: red;
+}
+
+.form {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
