@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
+import { HttpClientModule, HttpClient  } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
 
-   constructor(private app: AppComponent) {
+   constructor(private http: HttpClient, private router: Router, app: AppComponent) {
       app.update();
     }
 
@@ -19,6 +21,8 @@ export class SignupComponent {
   isError = false;
   signupButtonText = "Sign Up";
   errorText = "An error occured";
+
+  apiUrl = 'http://158.220.105.209:8080/user/create';
 
   signUp(username: string, displayname: string, email:string, password: string, confirmPassword: string){
     console.log(username + " - " + password);
@@ -29,11 +33,35 @@ export class SignupComponent {
     this.errorText = "An error occured";
 
     const packet = {
-      username: username,
-      displayname: displayname,
-      email: email,
-      password: password
+      type: "creation",
+      user: {
+        username: username,
+        displayName: displayname,
+        email: email,
+        password: password
+      }
     };
+
+    console.log("Signing up");
+    console.log(packet);
+
+    this.http.post(this.apiUrl, packet).subscribe(response => {
+      const result: any = response;
+      console.log(result);
+      if(result.message != "account-in-confirmation"){
+        switch(result.message) {
+          default: {
+            this.isError = true;
+            this.errorText = result.message;
+          }
+        }
+
+        this.isDisabled = false;
+        this.signupButtonText = "Sign Up";
+      } else {
+        this.router.navigate(["/2fa"], { queryParams: { id: result["confirm-id"], type:"signup" } });
+      }
+    });
 
     console.log(packet);
   }
