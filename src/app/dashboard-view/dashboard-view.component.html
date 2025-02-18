@@ -1,14 +1,34 @@
 <div class="center">
     <div class="form dashboard">
         <h2 class="center-horizontal">Most Active Games</h2>
-        <div #containerDiv class="form horizontalItems">
+        <div #containerDiv class="form itemContainer horizontalItems" aria-placeholder="test">
+            <p class="center-horizontal" *ngIf="visibleGames.length==0">{{loadingmsg}}</p>
             <div *ngFor="let game of visibleGames">
                 <app-game-object [name]="game.name" [players]="game.players" [uuid]="game.id"></app-game-object>
             </div>
         </div>
         <h2 class="center-horizontal">Most recent Records</h2>
-        <div class="form">
-
+        <div #containerDivRecords class="form itemContainer horizontalItems">
+            <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
+            <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
+            <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
         </div>
+        
     </div>
+
+
+    <!--<div class="center">
+        <div class="form dashboard">
+            <h2 class="center-horizontal">Most Active Games</h2>
+            <div #containerDiv class="form horizontalItems">
+                <div *ngFor="let game of visibleGames">
+                    <app-game-object [name]="game.name" [players]="game.players" [uuid]="game.id"></app-game-object>
+                </div>
+            </div>
+            <h2 class="center-horizontal">Most recent Records</h2>
+            <div class="form">
+                <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
+            </div>
+        </div>
+    </div> -->
 </div>

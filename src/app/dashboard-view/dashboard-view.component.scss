@@ -1,12 +1,22 @@
 .dashboard {
     width: 60vw;
     height: 80vh;
+    overflow: scroll;
 }
 
 .horizontalItems {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    overflow: scroll;
     gap: 15px;
+}
+
+.itemContainer {
+    min-width: 220px;
+}
+
+.view {
+    background-color: red;
 }

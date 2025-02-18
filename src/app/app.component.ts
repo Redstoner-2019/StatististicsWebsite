@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { ThemeService } from './services/theme.service';
+import { ThemeService } from './services/theme/theme.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HttpClientModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
