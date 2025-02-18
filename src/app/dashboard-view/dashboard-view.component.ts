@@ -59,7 +59,7 @@ export class DashboardViewComponent {
       'token': token
     });
 
-    this.http.post("http://localhost:8082/stats/game/getAll", request, {headers} ).subscribe(
+    this.http.post("http://158.220.105.209:8082/stats/game/getAll", request, {headers} ).subscribe(
       (data) => {
         this.games = [];
         const result:any = data;
@@ -78,8 +78,6 @@ export class DashboardViewComponent {
           let itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
 
           if(itemsThatFit < 4) itemsThatFit = 4;
-
-          console.log(itemsThatFit);
       
           this.visibleGames = this.games.slice(0, itemsThatFit);
 
@@ -106,7 +104,7 @@ export class DashboardViewComponent {
 
     }
 
-    this.http.post("http://localhost:8082/stats/recentRuns/getAll", request, {headers} ).subscribe(
+    this.http.post("http://158.220.105.209:8082/stats/recentRuns/getAll", request, {headers} ).subscribe(
       (data) => {
         this.runs = [];
         const result:any = data;
@@ -125,8 +123,6 @@ export class DashboardViewComponent {
           let itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
 
           if(itemsThatFit < 4) itemsThatFit = 4;
-
-          console.log(itemsThatFit);
       
           this.visibleRuns = this.runs.slice(0, itemsThatFit);
 
