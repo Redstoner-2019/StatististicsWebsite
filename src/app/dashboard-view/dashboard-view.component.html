@@ -9,9 +9,10 @@
         </div>
         <h2 class="center-horizontal">Most recent Records</h2>
         <div #containerDivRecords class="form itemContainer horizontalItems">
-            <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
-            <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
-            <app-game-object [name]="'test'" [players]="0" [uuid]="'test'"></app-game-object>
+            <p class="center-horizontal" *ngIf="visibleRuns.length==0">{{loadingmsgrun}}</p>
+            <div *ngFor="let run of visibleRuns">
+                <app-game-object [name]="run.name" [players]="run.scoreText" [uuid]="run.id"></app-game-object>
+            </div>
         </div>
         
     </div>

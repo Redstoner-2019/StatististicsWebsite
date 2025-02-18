@@ -18,19 +18,19 @@ export class DashboardViewComponent {
 
   constructor(private http: HttpClient) { }
 
-  games = [
-    { name: 'Minecraft', players: 0, id:"uuid"},
-    { name: 'Minecraft 1', players: 1, id:"uuid"},
-    { name: 'Minecraft 2', players: 2, id:"uuid"},
-    { name: 'Minecraft 3', players: 2, id:"uuid"},
-    { name: 'Minecraft 4', players: 2, id:"uuid"},
-    { name: 'Minecraft 5', players: 2, id:"uuid"},
-    { name: 'Minecraft 6', players: 2, id:"uuid"},
+  games: {name: string; players:number; id: string}[] = [
+
+  ];
+
+  runs: {name: string; scoreText:number; id: string}[] = [
+
   ];
 
   visibleGames: {name:string; players: number; id:string;}[] = [];
+  visibleRuns: {name:string; scoreText: number; id:string;}[] = [];
 
-  loadingmsg = "Loading..."
+  loadingmsg = "Loading...";
+  loadingmsgrun = "Loading...";
 
   itemWidth = 210;
   containerWidth = 0;
@@ -51,7 +51,7 @@ export class DashboardViewComponent {
 
     let token:any = localStorage.getItem("token");
 
-    let request = {
+    let request:any = {
         test:"test"
     }
 
@@ -88,19 +88,61 @@ export class DashboardViewComponent {
         console.log(error);
 
         this.games = [
-          { name: 'Minecraft', players: 0, id:"uuid"},
+          /*{ name: 'Minecraft', players: 0, id:"uuid"},
           { name: 'Minecraft 1', players: 1, id:"uuid"},
-          { name: 'Minecraft 2', players: 2, id:"uuid"},
-          { name: 'Minecraft 3', players: 2, id:"uuid"},
-          { name: 'Minecraft 4', players: 2, id:"uuid"},
-          { name: 'Minecraft 5', players: 2, id:"uuid"},
-          { name: 'Minecraft 6', players: 2, id:"uuid"},
+          { name: 'Minecraft 2', players: 2, id:"uuid"},*/
         ];
 
+        this.loadingmsg = "No games found."
+
         this.containerWidth = this.containerDiv.nativeElement.clientWidth;
-          const itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
+        const itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
+        this.visibleGames = this.games.slice(0, itemsThatFit);
+      }
+    );
+
+    request = {
+
+    }
+
+    this.http.post("http://localhost:8082/stats/recentRuns/getAll", request, {headers} ).subscribe(
+      (data) => {
+        this.runs = [];
+        const result:any = data;
+          result.forEach((element: any) => {
+            let run = {
+              name: element.name,
+              scoreText: 1,
+              id: element.id
+            }
+            this.runs.push(run);
+          });
+
+          this.containerWidth = this.containerDiv.nativeElement.clientWidth;
+          let itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
+
+          if(itemsThatFit < 4) itemsThatFit = 4;
+
+          console.log(itemsThatFit);
       
-          this.visibleGames = this.games.slice(0, itemsThatFit);
+          this.visibleRuns = this.runs.slice(0, itemsThatFit);
+
+          if(this.visibleRuns.length === 0) this.loadingmsgrun = "No games found."
+      },
+      (error) => {
+        console.log(error);
+
+        /*this.runs = [
+          { name: 'Run', scoreText: 0, id:"uuid"},
+          { name: 'Run 1', scoreText: 1, id:"uuid"},
+          { name: 'Run 2', scoreText: 2, id:"uuid"},
+        ];*/
+
+        this.loadingmsgrun = "No runs found."
+
+        this.containerWidth = this.containerDiv.nativeElement.clientWidth;
+        const itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
+        this.visibleRuns = this.runs.slice(0, itemsThatFit);
       }
     );
   }
