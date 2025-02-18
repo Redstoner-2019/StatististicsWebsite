@@ -18,16 +18,16 @@ export class DashboardViewComponent {
 
   constructor(private http: HttpClient) { }
 
-  games: {name: string; players:number; id: string}[] = [
+  games: {name: string; players:number; id: string; imageUrl:string;}[] = [
 
   ];
 
-  runs: {name: string; scoreText:number; id: string}[] = [
+  runs: {name: string; scoreText:number; id: string; imageUrl:string;}[] = [
 
   ];
 
-  visibleGames: {name:string; players: number; id:string;}[] = [];
-  visibleRuns: {name:string; scoreText: number; id:string;}[] = [];
+  visibleGames: {name:string; players: number; id:string; imageUrl:string;}[] = [];
+  visibleRuns: {name:string; scoreText: number; id:string; imageUrl:string;}[] = [];
 
   loadingmsg = "Loading...";
   loadingmsgrun = "Loading...";
@@ -67,8 +67,10 @@ export class DashboardViewComponent {
             let game = {
               name: element.name,
               players: 1,
-              id: element.id
+              id: element.id,
+              imageUrl: "/minecraft.png"
             }
+            if(element.imageUrl) game.imageUrl = element.imageUrl;
             this.games.push(game);
           });
 
@@ -112,8 +114,10 @@ export class DashboardViewComponent {
             let run = {
               name: element.name,
               scoreText: 1,
-              id: element.id
+              id: element.id,
+              imageUrl: "/minecraft.png"
             }
+            if(element.imageUrl) run.imageUrl = element.imageUrl;
             this.runs.push(run);
           });
 

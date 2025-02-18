@@ -4,14 +4,14 @@
         <div #containerDiv class="form itemContainer horizontalItems" aria-placeholder="test">
             <p class="center-horizontal" *ngIf="visibleGames.length==0">{{loadingmsg}}</p>
             <div *ngFor="let game of visibleGames">
-                <app-game-object [name]="game.name" [players]="game.players" [uuid]="game.id"></app-game-object>
+                <app-game-object [name]="game.name" [players]="game.players" [uuid]="game.id" [imageUrl]="game.imageUrl"></app-game-object>
             </div>
         </div>
         <h2 class="center-horizontal">Most recent Records</h2>
         <div #containerDivRecords class="form itemContainer horizontalItems">
             <p class="center-horizontal" *ngIf="visibleRuns.length==0">{{loadingmsgrun}}</p>
             <div *ngFor="let run of visibleRuns">
-                <app-game-object [name]="run.name" [players]="run.scoreText" [uuid]="run.id"></app-game-object>
+                <app-game-object [name]="run.name" [players]="run.scoreText" [uuid]="run.id" [imageUrl]="run.imageUrl"></app-game-object>
             </div>
         </div>
         

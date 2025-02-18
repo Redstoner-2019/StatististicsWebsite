@@ -11,4 +11,5 @@ export class GameObjectComponent {
   @Input() name!: string;
   @Input() players!: number;
   @Input() uuid!: string;
+  @Input() imageUrl!: string;
 }
