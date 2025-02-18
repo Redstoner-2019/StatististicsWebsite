@@ -37,6 +37,7 @@ export class DashboardViewComponent {
 
   ngAfterViewInit() {
     setTimeout(() => {
+      this.updateData();
       this.updateVisibleItems();
     }, 250);
   }
@@ -46,9 +47,7 @@ export class DashboardViewComponent {
     this.updateVisibleItems();
   }
 
-  updateVisibleItems() {
-    if (!this.containerDiv) return;
-
+  updateData(){
     let token:any = localStorage.getItem("token");
 
     let request:any = {
@@ -145,5 +144,13 @@ export class DashboardViewComponent {
         this.visibleRuns = this.runs.slice(0, itemsThatFit);
       }
     );
+  }
+
+  updateVisibleItems() {
+    if (!this.containerDiv) return;
+
+    this.containerWidth = this.containerDiv.nativeElement.clientWidth;
+    const itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
+    this.visibleRuns = this.runs.slice(0, itemsThatFit);
   }
 }
