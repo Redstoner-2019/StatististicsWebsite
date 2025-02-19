@@ -104,7 +104,7 @@ export class DashboardViewComponent {
 
     }
 
-    this.http.post("http://158.220.105.209:8082/stats/recentRuns/getAll", request, {headers} ).subscribe(
+    this.http.post("http://localhost:8082/stats/recentRuns/getAll", request, {headers} ).subscribe(
       (data) => {
         this.runs = [];
         const result:any = data;
@@ -124,7 +124,7 @@ export class DashboardViewComponent {
 
           if(itemsThatFit < 4) itemsThatFit = 4;
       
-          this.visibleRuns = this.runs.slice(0, itemsThatFit);
+          this.visibleRuns = this.runs.slice(0, itemsThatFit)
 
           if(this.visibleRuns.length === 0) this.loadingmsgrun = "No games found."
       },
