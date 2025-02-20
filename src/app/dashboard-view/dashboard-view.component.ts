@@ -59,7 +59,7 @@ export class DashboardViewComponent {
       'token': token
     });
 
-    this.http.post("http://158.220.105.209:8082/stats/game/getAll", request, {headers} ).subscribe(
+    this.http.post("http://localhost:8082/stats/game/getAll", request, {headers} ).subscribe(
       (data) => {
         this.games = [];
         const result:any = data;
@@ -68,7 +68,7 @@ export class DashboardViewComponent {
               name: element.name,
               players: 1,
               id: element.id,
-              imageUrl: "/minecraft.png"
+              imageUrl: element.icon
             }
             if(element.imageUrl) game.imageUrl = element.imageUrl;
             this.games.push(game);
@@ -113,7 +113,7 @@ export class DashboardViewComponent {
               name: element.name,
               scoreText: 1,
               id: element.id,
-              imageUrl: "/minecraft.png"
+              imageUrl:  element.icon
             }
             if(element.imageUrl) run.imageUrl = element.imageUrl;
             this.runs.push(run);
