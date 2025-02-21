@@ -2,12 +2,14 @@ import { Component, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, HttpClientModule ],
+  imports: [CommonModule, HttpClientModule, RouterModule ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -18,7 +20,7 @@ export class LoginComponent {
   errorText = "An error occured";
   apiUrl = 'http://158.220.105.209:8080/login';
 
-  constructor(private http: HttpClient, private router: Router, app: AppComponent) {
+  constructor(private http: HttpClient, private router: Router, app: AppComponent, private api: ApiService) {
     app.update();
   }
 
@@ -32,7 +34,9 @@ export class LoginComponent {
       password: password
     };
 
-    this.http.post(this.apiUrl, packet).subscribe(response => {
+    console.log(this.api.post(this.apiUrl,packet));
+
+    /*this.api.post(this.apiUrl, packet).subscribe(response => {
       const result: any = response;
       console.log(result);
       if(result.message != "success"){
@@ -65,6 +69,6 @@ export class LoginComponent {
 
         this.router.navigate(["/dashboard"], { queryParams: { category: 'electronics' } });
       }
-    });
+    });*/
   }
 }

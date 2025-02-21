@@ -12,8 +12,11 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  post(url: string, postData: any): Observable<any> {
-    return this.http.post(url, postData);
+  post(url: string, postData: any): any {
+    this.http.post(url, postData).subscribe(response => {
+      return response;
+    });
+    //return this.http.post(url, postData);
   }
 
   updatePost(url: string, id: number, postData: any): Observable<any> {
