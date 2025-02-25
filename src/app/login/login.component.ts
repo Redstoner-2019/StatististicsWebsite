@@ -34,9 +34,9 @@ export class LoginComponent {
       password: password
     };
 
-    console.log(this.api.post(this.apiUrl,packet));
+    //console.log(this.api.post(this.apiUrl,packet));
 
-    /*this.api.post(this.apiUrl, packet).subscribe(response => {
+    this.http.post(this.apiUrl, packet).subscribe((response) => {
       const result: any = response;
       console.log(result);
       if(result.message != "success"){
@@ -69,6 +69,6 @@ export class LoginComponent {
 
         this.router.navigate(["/dashboard"], { queryParams: { category: 'electronics' } });
       }
-    });*/
+    });
   }
 }

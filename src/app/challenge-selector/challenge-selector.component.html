@@ -1,0 +1,15 @@
+<div class="center">
+    <div class="form view scroll">
+        <h2 class="center-horizontal">Challenges</h2>
+        <input type="search" class="center-horizontal" placeholder="Search..." [(ngModel)]="searchTerm">
+        <div #gamesDiv class="form" aria-placeholder="test">
+            <div class="itemContainer horizontalItems">
+                <p class="center-horizontal" *ngIf="challenges.length==0">{{loadingmsg}}</p>
+                <div *ngFor="let challenge of filteredItems">
+                    <app-game-object [name]="challenge.name" [players]="challenge.players" [uuid]="challenge.id" [imageUrl]="challenge.imageUrl"></app-game-object>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

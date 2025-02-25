@@ -1,0 +1,30 @@
+.view {
+    width: 60vw;
+    height: 80vh;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.horizontalItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    grid-auto-rows: max-content;
+    gap: 15px; // Spacing between grid items
+}
+
+.itemContainer {
+    min-width: 200px;
+}
+
+@media only screen and (max-width: 500px) {
+    .view {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 60vw;
+        height:60vh;
+    }
+  }
