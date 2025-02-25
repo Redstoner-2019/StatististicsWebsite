@@ -34,15 +34,7 @@ export class LoginComponent {
       password: password
     };
 
-    let result = this.api.post(this.apiUrl,packet).toString();
-
-    //console.log(result);
-
-    //let r = this.api.post(this.apiUrl,packet);
-
-    //console.log(r);
-
-    this.http.post(this.apiUrl, packet).subscribe(response => {
+    this.http.post(this.apiUrl, packet).subscribe((response) => {
       const result: any = response;
       console.log(result);
       if(result.message != "success"){
