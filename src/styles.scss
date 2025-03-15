@@ -8,12 +8,39 @@
     --default-button-disabled: rgba(255, 255, 255, 0.1);
   }
 
-.lofi-theme {
+  .lofi-theme {
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     background-image: url('/lofi-anime.jpg');
+    background-size: cover; 
+}
+
+.sunset-theme {
+    --primary-color: #222222;
+    --secondary-color: #1a1a1a;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(255, 255, 255, 0.6);
+    background-image: url('/sunset.jpg');
+    background-size: cover; 
+}
+
+.blackhole-theme {
+    --primary-color: #222222;
+    --secondary-color: #1a1a1a;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(255, 255, 255, 0.6);
+    background-image: url('/blackhole.png');
+    background-size: cover; 
+}
+
+.stars-theme {
+    --primary-color: #222222;
+    --secondary-color: #1a1a1a;
+    --text-color: #ffffff;
+    --placeholder-text-color: rgba(255, 255, 255, 0.6);
+    background-image: url('/milkyway.png');
     background-size: cover; 
 }
   
