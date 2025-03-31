@@ -11,13 +11,17 @@
 
 .horizontalItems {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(100%, auto));
     grid-auto-rows: max-content;
     gap: 15px; // Spacing between grid items
 }
 
 .itemContainer {
     min-width: 200px;
+}
+
+.gamesDiv {
+    margin-top: 15px;
 }
 
 @media only screen and (max-width: 500px) {

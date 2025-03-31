@@ -56,7 +56,6 @@ export class AppComponent {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.params = params;
-      console.log(this.params);
     });
   }
 }

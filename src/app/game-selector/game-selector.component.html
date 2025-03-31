@@ -2,7 +2,7 @@
     <div class="form view scroll">
         <h2 class="center-horizontal">Games</h2>
         <input type="search" class="center-horizontal" placeholder="Search..." [(ngModel)]="searchTerm">
-        <div #gamesDiv class="form" aria-placeholder="test">
+        <div #gamesDiv class="form gamesDiv" aria-placeholder="test">
             <div class="itemContainer horizontalItems">
                 <p class="center-horizontal" *ngIf="games.length==0">{{loadingmsg}}</p>
                 <div *ngFor="let game of filteredItems">

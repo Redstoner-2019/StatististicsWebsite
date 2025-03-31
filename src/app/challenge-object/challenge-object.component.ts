@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-challenge-object',
@@ -8,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './challenge-object.component.scss'
 })
 export class ChallengeObjectComponent {
-
+challengeSelect() {
+throw new Error('Method not implemented.');
+}
+  @Input() name!: string;
+  @Input() description!: number;
+  @Input() version!: string;
+  @Input() game!: string;
+  @Input() uuid!: string;
 }

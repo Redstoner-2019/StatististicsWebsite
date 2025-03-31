@@ -13,20 +13,42 @@ import { FormsModule } from '@angular/forms';
 })
 export class GameSelectorComponent {
 
+  games: Game[] = [];
+
+  constructor(private http: HttpClient) {
+    const token: any = localStorage.getItem("token");
+
+    const packet = {
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token
+    });
+
+    const apiUrl = 'http://localhost:8082/stats/game/getAll';
+
+    this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
+      const result: any = response;
+
+      for(const game of result){
+        console.log(game);
+
+        const convertedGame: Game = {
+          id: game.id,
+          name: game.name,
+          players: 3,
+          imageUrl: game.icon
+        }
+
+        this.games.push(convertedGame);
+      }
+    });
+  }
+
   loadingmsg = "Loading...";
 
   searchTerm: string = '';
-
-  games: Game[] = [
-    { id: 'test1', name: 'FNaF', players: 3, imageUrl: 'default.png'},
-    { id: 'test2', name: 'FNaF 2', players: 3, imageUrl: 'default.png'},
-    { id: 'test3', name: 'FNaF 3', players: 3, imageUrl: 'default.png'},
-    { id: 'test3', name: 'FNaF 4', players: 3, imageUrl: 'default.png'},
-    { id: 'test3', name: 'FNaF 5', players: 3, imageUrl: 'default.png'},
-    { id: 'test3', name: 'FNaF 6', players: 3, imageUrl: 'default.png'},
-    { id: 'test3', name: 'FNaF 7', players: 3, imageUrl: 'default.png'},
-    { id: 'test3', name: 'FNaF 8', players: 3, imageUrl: 'default.png'},
-  ];
 
   get filteredItems(): Game[] {
     return this.games.filter(game =>
