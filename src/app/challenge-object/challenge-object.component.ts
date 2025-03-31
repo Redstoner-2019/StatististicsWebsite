@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-challenge-object',
@@ -8,9 +10,15 @@ import { Component, Input } from '@angular/core';
   styleUrl: './challenge-object.component.scss'
 })
 export class ChallengeObjectComponent {
-challengeSelect() {
-throw new Error('Method not implemented.');
-}
+
+  constructor(private router: Router, private dashboard:DashboardComponent) {
+    }
+  
+    challengeSelect(){
+      this.dashboard.tab = "challenges";
+      this.router.navigate(["/stats"], { queryParams: { game: this.uuid,challenge: this.uuid , version: this.version } });
+    }
+
   @Input() name!: string;
   @Input() description!: string;
   @Input() version!: string;
