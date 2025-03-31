@@ -37,7 +37,7 @@ export class GameSelectorComponent {
         const convertedGame: Game = {
           id: game.id,
           name: game.name,
-          players: 3,
+          creator: game.owner,
           imageUrl: game.icon
         }
 
@@ -60,7 +60,7 @@ export class GameSelectorComponent {
 export interface Game {
   id: string,
   name: string;
-  players: number;
+  creator: string;
   imageUrl: string;
 }
 

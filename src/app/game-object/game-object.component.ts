@@ -11,8 +11,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 })
 export class GameObjectComponent {
   @Input() name!: string;
-  @Input() players!: number;
+  @Input() creator!: string;
   @Input() uuid!: string;
+  @Input() currentVersion: string = "1.0.0";
   @Input() imageUrl!: string;
 
   constructor(private router: Router, private dashboard:DashboardComponent) {

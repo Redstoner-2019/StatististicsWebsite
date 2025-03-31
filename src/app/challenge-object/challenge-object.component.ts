@@ -12,7 +12,7 @@ challengeSelect() {
 throw new Error('Method not implemented.');
 }
   @Input() name!: string;
-  @Input() description!: number;
+  @Input() description!: string;
   @Input() version!: string;
   @Input() game!: string;
   @Input() uuid!: string;

@@ -6,7 +6,7 @@
             <div class="itemContainer horizontalItems">
                 <p class="center-horizontal" *ngIf="games.length==0">{{loadingmsg}}</p>
                 <div *ngFor="let game of filteredItems">
-                    <app-game-object [name]="game.name" [players]="game.players" [uuid]="game.id" [imageUrl]="game.imageUrl"></app-game-object>
+                    <app-game-object [name]="game.name" [creator]="game.creator" [uuid]="game.id" [imageUrl]="game.imageUrl"></app-game-object>
                 </div>
             </div>
         </div>

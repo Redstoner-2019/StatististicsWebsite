@@ -71,7 +71,7 @@ export class ChallengeSelectorComponent {
 
 export interface Challenge {
   name: string;
-  description: number;
+  description: string;
   version: string;
   game: string;
   uuid: string;

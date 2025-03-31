@@ -18,7 +18,7 @@ export class DashboardViewComponent {
 
   constructor(private http: HttpClient) { }
 
-  games: {name: string; players:number; id: string; imageUrl:string;}[] = [
+  games: {name: string; creator:string; id: string; imageUrl:string;}[] = [
 
   ];
 
@@ -26,7 +26,7 @@ export class DashboardViewComponent {
 
   ];
 
-  visibleGames: {name:string; players: number; id:string; imageUrl:string;}[] = [];
+  visibleGames: {name:string; creator: string; id:string; imageUrl:string;}[] = [];
   visibleRuns: {name:string; scoreText: number; id:string; imageUrl:string;}[] = [];
 
   loadingmsg = "Loading...";
@@ -66,7 +66,7 @@ export class DashboardViewComponent {
           result.forEach((element: any) => {
             let game = {
               name: element.name,
-              players: 1,
+              creator: element.owner,
               id: element.id,
               imageUrl: element.icon
             }
