@@ -6,27 +6,35 @@
         <div class="form definitions">
             <div class="subSelection">
                 <label for="version">Choose a Version: </label>
-                <select id="version" [(ngModel)]="sort" style="padding: 5px;" class="form selector">
+                <select id="version" [(ngModel)]="version" class="form selector">
                     <option *ngFor="let option of versions" [value]="option">{{ option }}</option>
                 </select>
             </div>
             <div class="subSelection">
                 <label for="challenge">Choose a Challenge: </label>
-                <select id="challenge" [(ngModel)]="sort" style="padding: 5px;" class="form selector">
+                <select id="challenge" [(ngModel)]="challenge" class="form selector">
                     <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
                 </select>
             </div>
             <div class="subSelection">
                 <label for="sorting">Choose a sorting: </label>
-                <select id="sorting" [(ngModel)]="sort" style="padding: 5px;" class="form selector">
+                <select id="sorting" [(ngModel)]="sort" class="form selector">
                     <option *ngFor="let option of sortings" [value]="option">{{ option }}</option>
                 </select>
             </div>
-            <button>Apply</button>
+            <button (click)="updateData()">Apply</button>
         </div>
 
-        <div class="form">
-            <app-stat-entry></app-stat-entry>
+        <div class="form entries">
+            <div class="titles">
+                <p class="place">#</p>
+                <p class="username">Username</p>
+                <p>Record</p>
+                <p class="submitted">Submitted</p>
+            </div>
+            <div *ngFor="let entry of entries">
+                <app-stat-entry class="entry" [place]="[entry.place]" [username]="[entry.username]" [value]="[entry.value]" [date]="[entry.date]"></app-stat-entry>
+            </div> 
         </div>
     </div>
 </div>

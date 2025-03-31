@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-stat-entry',
@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './stat-entry.component.scss'
 })
 export class StatEntryComponent {
-
+  @Input() place!: string[];
+  @Input() username!: string[];
+  @Input() value!: string[];
+  @Input() date!: string[];
 }
