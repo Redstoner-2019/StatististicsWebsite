@@ -1,0 +1,19 @@
+.statsMain {
+    width: 75vw;
+    height: 90vh;
+}
+
+.definitions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.subSelection {
+    width: 100%;
+}
+
+.selector {
+    width: 50%;
+    margin-left: auto;
+}

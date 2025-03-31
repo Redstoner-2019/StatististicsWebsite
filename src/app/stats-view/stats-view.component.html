@@ -1,3 +1,32 @@
 <div class="center">
-    <p>Test</p>
+    <div class="form statsMain">
+        <h2 class="center-horizontal">{{game}}</h2>
+        <h3 class="center-horizontal">{{challenge}}</h3>
+
+        <div class="form definitions">
+            <div class="subSelection">
+                <label for="version">Choose a Version: </label>
+                <select id="version" [(ngModel)]="sort" style="padding: 5px;" class="form selector">
+                    <option *ngFor="let option of versions" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+            <div class="subSelection">
+                <label for="challenge">Choose a Challenge: </label>
+                <select id="challenge" [(ngModel)]="sort" style="padding: 5px;" class="form selector">
+                    <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+            <div class="subSelection">
+                <label for="sorting">Choose a sorting: </label>
+                <select id="sorting" [(ngModel)]="sort" style="padding: 5px;" class="form selector">
+                    <option *ngFor="let option of sortings" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+            <button>Apply</button>
+        </div>
+
+        <div class="form">
+            <app-stat-entry></app-stat-entry>
+        </div>
+    </div>
 </div>
