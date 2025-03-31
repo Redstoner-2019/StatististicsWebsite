@@ -16,7 +16,7 @@ export class ChallengeObjectComponent {
   
     challengeSelect(){
       this.dashboard.tab = "challenges";
-      this.router.navigate(["/stats"], { queryParams: { game: this.uuid,challenge: this.uuid , version: this.version } });
+      this.router.navigate(["/stats"], { queryParams: { game: this.game,challenge: this.uuid , version: this.version } });
     }
 
   @Input() name!: string;

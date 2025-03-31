@@ -19,6 +19,9 @@ export class StatsViewComponent {
   version = "";
   challenge = "";
 
+  gameDisplay = "Loading...";
+  challengeDisplay = "Loading...";
+
   sort: string = 'powerLeft';
   sortings: string[] = ["powerLeft", "death", "place"];
 
@@ -28,29 +31,81 @@ export class StatsViewComponent {
   entries: Entry[] = [
   ];
 
+  challengeMapping: any = {};
+
   constructor(private http: HttpClient, private route: ActivatedRoute) {
   }
 
   updateData() {
     const token: any = localStorage.getItem("token");
 
-    const packet = {
-      "pageNumber": 0,
-      "pageSize": 5,
-      "zeroIndex": true,
-      "ascending": true,
-      "sortBy": this.sort,
-      "game": "45204620-e574-4253-841f-b2f24e2882ef",
-      "challenge": "bf65f8c6-baca-4376-9c69-69b833e3ffca",
-      "version": this.version
-    };
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'token': token
     });
 
-    const apiUrl = 'http://localhost:8082/stats/challengeEntry/getAllSorted';
+    this.challenges = [];
+
+    let packetAllChallenges = {
+      "game": this.game,
+      "version": this.version
+    };
+
+    console.log(packetAllChallenges);
+
+    let apiUrl = 'http://localhost:8082/stats/challenges/getAll';
+
+    this.http.post(apiUrl, packetAllChallenges, {headers}).subscribe((response) => {
+      const result: any = response;
+      this.challengeDisplay = result.name;
+
+      for(const challenge of result){
+        this.challenges.push(challenge.name);
+
+        this.challengeMapping[challenge.name] = challenge.id;
+      }
+    });
+
+    let packetGame = {
+      "uuid": this.game
+    };
+
+    apiUrl = 'http://localhost:8082/stats/game/get';
+
+    this.http.post(apiUrl, packetGame, {headers}).subscribe((response) => {
+      const result: any = response;
+      this.gameDisplay = result.name;
+    });
+
+    let packetChallenge = {
+      "uuid": this.challenge
+    };
+
+    apiUrl = 'http://localhost:8082/stats/challenges/get';
+
+    this.http.post(apiUrl, packetChallenge, {headers}).subscribe((response) => {
+      const result: any = response;
+      this.challengeDisplay = result.name;
+    });
+
+    setTimeout(function() {
+
+    },500)
+
+    this.challenge = this.challengeMapping[this.challengeDisplay];
+
+    let packet = {
+      "pageNumber": 0,
+      "pageSize": 5,
+      "zeroIndex": true,
+      "ascending": true,
+      "sortBy": this.sort,
+      "game": this.game,
+      "challenge": this.challenge,
+      "version": this.version
+    };
+
+    apiUrl = 'http://localhost:8082/stats/challengeEntry/getAllSorted';
 
     this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
       const result: any = response;
@@ -73,8 +128,6 @@ export class StatsViewComponent {
 
         this.entries.push(e);
       }
-
-      console.log(data);
     });
   }
 

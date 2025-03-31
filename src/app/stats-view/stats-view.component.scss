@@ -11,12 +11,15 @@
 }
 
 .subSelection {
+    display: flex;
+    flex-direction: row;
     width: 100%;
 }
 
 .selector {
-    width: 50%;
+    width: 75%;
     margin-left: auto;
+    padding: 10px;
 }
 
 .entries {
@@ -45,4 +48,9 @@
 .submitted{
     margin-left: auto;
     margin-right: 15px;
+}
+
+.selectorLabel {
+    font-size: 20px;
+    margin-top: 10px;
 }
