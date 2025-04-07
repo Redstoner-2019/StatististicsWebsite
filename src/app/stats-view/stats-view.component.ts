@@ -60,25 +60,27 @@ export class StatsViewComponent {
       'token': token
     });
 
-    this.challenges = [];
+    let apiUrl = 'http://localhost:8082/stats/challenges/getAll';
+
+    /*this.challenges = [];
 
     let packetAllChallenges = {
       "game": this.game,
       "version": this.version
     };
 
-    let apiUrl = 'http://localhost:8082/stats/challenges/getAll';
-
     this.http.post(apiUrl, packetAllChallenges, {headers}).subscribe((response) => {
       const result: any = response;
       this.challengeDisplay = result.name;
+
+      console.log(result);
 
       for(const challenge of result){
         this.challenges.push(challenge.name);
 
         this.challengeMapping[challenge.name] = challenge.id;
       }
-    });
+    });*/
 
     let packetGame = {
       "uuid": this.game
@@ -95,6 +97,8 @@ export class StatsViewComponent {
       "uuid": this.challenge
     };
 
+    console.log(packetChallenge);
+
     apiUrl = 'http://localhost:8082/stats/challenges/get';
 
     this.http.post(apiUrl, packetChallenge, {headers}).subscribe((response) => {
@@ -102,7 +106,7 @@ export class StatsViewComponent {
       this.challengeDisplay = result.name;
     });
 
-    this.challenge = this.challengeMapping[this.challengeDisplay];
+    //this.challenge = this.challengeMapping[this.challengeDisplay];
 
     let packet = {
       "pageNumber": this.page,
@@ -111,7 +115,7 @@ export class StatsViewComponent {
       "ascending": true,
       "sortBy": this.sort,
       "game": this.game,
-      "challenge": "8d7a0f25-0f78-41d1-9ac9-ce4bf1237eb9",
+      "challenge": this.challenge,
       "version": this.version
     };
 

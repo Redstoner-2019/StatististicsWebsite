@@ -12,7 +12,7 @@
             </div>
             <div class="subSelection">
                 <label class="selectorLabel" for="challenge">Choose a Challenge: </label>
-                <select id="challenge" [(ngModel)]="challenge" class="form selector">
+                <select id="challenge" [(ngModel)]="challengeDisplay" class="form selector">
                     <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
                 </select>
             </div>
