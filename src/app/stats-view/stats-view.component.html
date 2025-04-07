@@ -1,5 +1,5 @@
 <div class="center">
-    <div class="form statsMain">
+    <div class="form statsMain scroll">
         <h1 class="center-horizontal">{{gameDisplay}}</h1>
         <h2 class="center-horizontal">{{challengeDisplay}}</h2>
 
@@ -32,9 +32,18 @@
                 <h3>Record</h3>
                 <h3 class="submitted">Submitted</h3>
             </div>
-            <div *ngFor="let entry of entries">
-                <app-stat-entry class="entry" [place]="[entry.place]" [username]="[entry.username]" [value]="[entry.value]" [date]="[entry.date]"></app-stat-entry>
-            </div> 
+            <div class="">
+                <div *ngFor="let entry of entries">
+                    <app-stat-entry class="entry" [place]="[entry.place]" [username]="[entry.username]" [value]="[entry.value]" [date]="[entry.date]"></app-stat-entry>
+                </div> 
+            </div>
+        </div>
+
+        <div class="form" style="margin-top: 15px;">
+            <label (click)="pageMinus()" class="labelFormatting">-</label>
+            <label class="labelFormattingNoHover">{{page+1}}</label>
+            <label (click)="pagePlus()" class="labelFormatting">+</label>
+            <label class="labelFormatting">{{maxpages}}</label>
         </div>
     </div>
 </div>
