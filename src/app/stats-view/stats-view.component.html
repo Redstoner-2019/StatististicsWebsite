@@ -1,5 +1,5 @@
 <div class="center">
-    <div class="form statsMain scroll">
+    <div class="form statsMain">
         <h1 class="center-horizontal">{{gameDisplay}}</h1>
         <h2 class="center-horizontal">{{challengeDisplay}}</h2>
 
@@ -24,8 +24,8 @@
             </div>
             <button (click)="updateData()">Apply</button>
         </div>
-
-        <div class="form entries">
+        <div>
+            <div class="form entries scroll">
             <div class="titles">
                 <h3 class="place">#</h3>
                 <h3 class="username">Username</h3>
@@ -38,6 +38,8 @@
                 </div> 
             </div>
         </div>
+        </div>
+        
 
         <div class="form" style="margin-top: 15px;">
             <label (click)="pageMinus()" class="labelFormatting">-</label>
