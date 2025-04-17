@@ -1,9 +1,11 @@
+import { Challenge } from './../challenge-selector/challenge-selector.component';
 import { HttpClient, HttpHeaders, HttpClientModule  } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { StatEntryComponent } from "../stat-entry/stat-entry.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stats-view',
@@ -26,18 +28,25 @@ export class StatsViewComponent {
   sortings: string[] = ["powerLeft", "death", "place"];
 
   versions: string[] = ["1.0.0", "1.1.0", "1.2.0", "1.3.0"];
-  challenges: string[] = ["Ventablack", "Night 6",];
+  challenges: ChallengeI[] = [
+    {
+      displayname: "Night 6",
+      uuid: "test6"
+    },
+    {
+      displayname: "Ventablack",
+      uuid: "venta"
+    }
+  ];
 
   entries: Entry[] = [
   ];
-
-  challengeMapping: any = {};
 
   page = 0;
   maxpages = 2;
   pageSize = 10;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
   }
 
   pageMinus(){
@@ -52,7 +61,20 @@ export class StatsViewComponent {
     this.updateData();
   }
 
+  switchToChallenge(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+
+    this.challenge = selectedValue.toString();
+    this.updateData();
+  }
+
   updateData() {
+    if(this.game == "") {
+      this.router.navigate(["/dashboard"], { queryParams: { tab: "games" } });
+      return;
+    }
+
     const token: any = localStorage.getItem("token");
 
     const headers = new HttpHeaders({
@@ -62,7 +84,7 @@ export class StatsViewComponent {
 
     let apiUrl = 'http://localhost:8082/stats/challenges/getAll';
 
-    /*this.challenges = [];
+    this.challenges = [];
 
     let packetAllChallenges = {
       "game": this.game,
@@ -71,87 +93,89 @@ export class StatsViewComponent {
 
     this.http.post(apiUrl, packetAllChallenges, {headers}).subscribe((response) => {
       const result: any = response;
-      this.challengeDisplay = result.name;
-
-      console.log(result);
 
       for(const challenge of result){
-        this.challenges.push(challenge.name);
+        let cha: ChallengeI = {
+          displayname: challenge.name,
+          uuid: challenge.id
+        };
 
-        this.challengeMapping[challenge.name] = challenge.id;
+        this.challenges.push(cha);
+
+        if(this.challenge == "") {
+          this.challenge = cha.uuid;
+        }
       }
-    });*/
+
+      apiUrl = 'http://localhost:8082/stats/game/get';
+
+      this.http.post(apiUrl, packetGame, {headers}).subscribe((response) => {
+        const result: any = response;
+        this.gameDisplay = result.name;
+      });
+
+      let packetChallenge = {
+        "uuid": this.challenge
+      };
+
+      apiUrl = 'http://localhost:8082/stats/challenges/get';
+
+      this.http.post(apiUrl, packetChallenge, {headers}).subscribe((response) => {
+        const result: any = response;
+        this.challengeDisplay = result.name;
+      });
+
+      let packet = {
+        "pageNumber": this.page,
+        "pageSize": this.pageSize,
+        "zeroIndex": true,
+        "ascending": true,
+        "sortBy": this.sort,
+        "game": this.game,
+        "challenge": this.challenge,
+        "version": this.version
+      };
+
+      apiUrl = 'http://localhost:8082/stats/challengeEntry/getAllSorted';
+
+      this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
+        const result: any = response;
+
+        const data = result.result;
+
+        let i:number = 0;
+
+        this.entries = [];
+        this.maxpages = result.pages;
+
+        for(const entry of data){
+          i++;
+
+          const e: Entry = {
+            place: (i + (this.page * this.pageSize)).toString(),
+            username: entry.username.toString(),
+            value: entry.data[this.sort].toString(),
+            date: entry.created.toString()
+          }
+
+          this.entries.push(e);
+        }
+      });
+    });
 
     let packetGame = {
       "uuid": this.game
     };
 
-    apiUrl = 'http://localhost:8082/stats/game/get';
-
-    this.http.post(apiUrl, packetGame, {headers}).subscribe((response) => {
-      const result: any = response;
-      this.gameDisplay = result.name;
-    });
-
-    let packetChallenge = {
-      "uuid": this.challenge
-    };
-
-    console.log(packetChallenge);
-
-    apiUrl = 'http://localhost:8082/stats/challenges/get';
-
-    this.http.post(apiUrl, packetChallenge, {headers}).subscribe((response) => {
-      const result: any = response;
-      this.challengeDisplay = result.name;
-    });
-
-    //this.challenge = this.challengeMapping[this.challengeDisplay];
-
-    let packet = {
-      "pageNumber": this.page,
-      "pageSize": this.pageSize,
-      "zeroIndex": true,
-      "ascending": true,
-      "sortBy": this.sort,
-      "game": this.game,
-      "challenge": this.challenge,
-      "version": this.version
-    };
-
-    apiUrl = 'http://localhost:8082/stats/challengeEntry/getAllSorted';
-
-    this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
-      const result: any = response;
-
-      const data = result.result;
-
-      let i:number = 0;
-
-      this.entries = [];
-      this.maxpages = result.pages;
-
-      for(const entry of data){
-        i++;
-
-        const e: Entry = {
-          place: (i + (this.page * this.pageSize)).toString(),
-          username: entry.username.toString(),
-          value: entry.data[this.sort].toString(),
-          date: entry.created.toString()
-        }
-
-        this.entries.push(e);
-      }
-    });
+    
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.params = params;
-      this.game = params['game'];
-      this.version = params['version'];
-      this.challenge = params['challenge'];
+      if(params["game"] != undefined) this.game = params['game']; else this.game = "";
+      if(params["version"] != undefined) this.version = params['version']; else this.version = "";
+      if(params["challenge"] != undefined) this.challenge = params['challenge']; else this.challenge = "";
     });
 
     this.updateData();
@@ -163,4 +187,9 @@ interface Entry {
   username: string,
   value: string,
   date: string
+}
+
+interface ChallengeI {
+  displayname: string,
+  uuid: string
 }

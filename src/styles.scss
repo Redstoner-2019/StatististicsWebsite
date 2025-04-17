@@ -2,6 +2,8 @@
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
+    --contrast: white;
+    --default-button-selected: rgba(0,86,179,0.1);
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     --default-button: rgba(0,86, 179,1);
     --default-button-hover: rgba(0, 86, 179, 0.8);
@@ -12,6 +14,8 @@
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
+    --default-button-selected: rgba(255,255,255,0.1);
+    --default-button-hover: rgba(255, 255, 255, 0.2);
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     background-image: url('/lofi-anime.jpg');
     background-size: cover; 
@@ -21,6 +25,8 @@
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
+    --default-button-selected: rgba(255,255,255,0.1);
+    --default-button-hover: rgba(255, 255, 255, 0.2);
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     background-image: url('/sunset.jpg');
     background-size: cover; 
@@ -30,6 +36,8 @@
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
+    --default-button-selected: rgba(255,255,255,0.1);
+    --default-button-hover: rgba(255, 255, 255, 0.2);
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     background-image: url('/blackhole.png');
     background-size: cover; 
@@ -39,6 +47,8 @@
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
+    --default-button-selected: rgba(255,255,255,0.1);
+    --default-button-hover: rgba(255, 255, 255, 0.2);
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     background-image: url('/milkyway.png');
     background-size: cover; 
@@ -48,6 +58,9 @@
     --primary-color: #222222;
     --secondary-color: #1a1a1a;
     --text-color: #ffffff;
+    --contrast: white;
+    --default-button-selected: rgba(255,255,255,0.1);
+    --default-button-hover: rgba(255, 255, 255, 0.2);
     --placeholder-text-color: rgba(255, 255, 255, 0.6);
     background-color: var(--primary-color);
   }
@@ -64,6 +77,8 @@
     --primary-color: #ffffff;
     --secondary-color: #c5c5c5;
     --text-color: #000000;
+    --default-button-selected: rgba(0,0,0,0.1);
+    --default-button-hover: rgba(0, 0, 0, 0.2);
     --placeholder-text-color: rgba(0, 0, 0, 0.6);
     background-color: var(--primary-color);
   }
@@ -153,13 +168,13 @@ button {
 }
 
 .buttonText:hover{
-    background-color: rgba($color: #FFFFFF, $alpha: 0.2);
+    background-color: var(--default-button-hover);
     backdrop-filter: blur(30px);
 }
 
-.selected{
-    background-color: transparent;
-    backdrop-filter: blur(5px);
+button.selected{
+    background-color: var(--default-button-selected);
+    backdrop-filter: blur(30px);
 }
 
 button.disabled {

@@ -6,19 +6,19 @@
         <div class="form definitions">
             <div class="subSelection">
                 <label class="selectorLabel" for="version">Choose a Version: </label>
-                <select id="version" [(ngModel)]="version" class="form selector">
+                <select id="version" [(ngModel)]="version" class="form selector" (change)="updateData()">
                     <option *ngFor="let option of versions" [value]="option">{{ option }}</option>
                 </select>
             </div>
             <div class="subSelection">
                 <label class="selectorLabel" for="challenge">Choose a Challenge: </label>
-                <select id="challenge" [(ngModel)]="challengeDisplay" class="form selector">
-                    <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
+                <select [(ngModel)]="challenge" class="form selector" (change)="switchToChallenge($event)">
+                    <option *ngFor="let option of challenges" [value]="option.uuid">{{ option.displayname }}</option>
                 </select>
             </div>
             <div class="subSelection">
                 <label class="selectorLabel" for="sorting">Choose a sorting: </label>
-                <select id="sorting" [(ngModel)]="sort" class="form selector">
+                <select id="sorting" [(ngModel)]="sort" class="form selector" (change)="updateData()">
                     <option *ngFor="let option of sortings" [value]="option">{{ option }}</option>
                 </select>
             </div>

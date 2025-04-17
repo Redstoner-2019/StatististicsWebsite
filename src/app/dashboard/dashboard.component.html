@@ -6,6 +6,7 @@
                 <button class="buttonText fullWidth" [ngClass]="{'selected': tab === 'games'}" (click)="switchTab('games')">Games</button>
                 <!-- <button class="buttonText fullWidth" [ngClass]="{'selected': tab === 'challenges'}" (click)="switchTab('challenges')">New Runs</button> -->
                 <button class="buttonText fullWidth" [ngClass]="{'selected': tab === 'themes'}" (click)="switchTab('themes')">Themes</button>
+                <button class="buttonText fullWidth" [ngClass]="{'selected': tab === 'developer'}" (click)="switchTab('developer')">Developer</button>
             </div>
         </div>
     </div>
@@ -14,6 +15,7 @@
         <app-theme-selector *ngIf="tab === 'themes'"></app-theme-selector>
         <app-game-selector *ngIf="tab === 'games'"></app-game-selector>
         <app-challenge-selector *ngIf="tab === 'challenges'"></app-challenge-selector>
+        <app-developer *ngIf="tab === 'developer'"></app-developer>
     </div>
 </div>
 

@@ -8,6 +8,7 @@ import { TwofactorComponent } from './twofactor/twofactor.component';
 import { ThemeSelectorComponent } from './theme-selector/theme-selector.component';
 import { GameOverviewComponent } from './game-overview/game-overview.component';
 import { StatsViewComponent } from './stats-view/stats-view.component';
+import { ChallengeSelectorComponent } from './challenge-selector/challenge-selector.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: '2fa', component: TwofactorComponent},
     {path: 'themes', component: ThemeSelectorComponent},
     {path: 'stats', component: StatsViewComponent},
+    {path: 'challenges', component: ChallengeSelectorComponent},
     {path: 'games/:name', component: GameOverviewComponent },
     {path: 'games/:name/info', component: GameOverviewComponent },
     {path: '**', redirectTo: 'dashboard'},

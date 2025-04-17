@@ -21,6 +21,6 @@ export class GameObjectComponent {
 
   challenges(){
     this.dashboard.tab = "challenges";
-    this.router.navigate(["/dashboard"], { queryParams: { game: this.uuid, version: "1.3.0" } });
+    this.router.navigate(["/stats"], { queryParams: { game: this.uuid, version: "1.3.0" } });
   }
 }

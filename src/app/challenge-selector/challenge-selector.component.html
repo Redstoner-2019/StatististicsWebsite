@@ -5,7 +5,7 @@
         <div #gamesDiv class="form gamesDiv" aria-placeholder="test">
             <div class="itemContainer horizontalItems">
                 <p class="center-horizontal" *ngIf="challenges.length==0">{{loadingmsg}}</p>
-                <div *ngFor="let challenge of filteredItems">
+                <div *ngFor="let challenge of filteredItems()">
                     <app-challenge-object [name]="challenge.name" [description]="challenge.description" [version]="challenge.version" [game]="challenge.game" [uuid]="challenge.uuid"></app-challenge-object>
                 </div>
             </div>

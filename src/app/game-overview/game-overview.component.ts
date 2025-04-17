@@ -16,7 +16,6 @@ export class GameOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.gameName = params.get('name') || '';
-      console.log("Game Name:", this.gameName);
     });
   }
 }
