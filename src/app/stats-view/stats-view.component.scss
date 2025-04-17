@@ -1,94 +1,121 @@
 .statsMain {
-    width: 75vw;
-    height: 90vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.scroll {
+  overflow:auto;
+  height: 37vh;
 }
 
-.definitions {
+.mainContent{
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 15px;
-}
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 
-.subSelection {
+  .definitions {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .title{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    //margin-top: 5px;
+    //margin-bottom: 5px;
+  }
+
+  .subSelection {
     display: flex;
     flex-direction: row;
     width: 100%;
+    .selector {
+      width: 75%;
+      margin-left: auto;
+      padding: 10px;
+    }
+  }
 }
 
-.selector {
-    width: 75%;
-    margin-left: auto;
-    padding: 10px;
-}
 
-.entries {
-    height: auto;
-}
 
-.entry {
-    margin-top: 15px;
-    height: 25px;
-}
 
-.titles {
-    display: flex;
-    flex-direction: row;
-}
 
-.place{
-    width: 50px;
-    margin-left: 15px;
-}
 
-.username{
-    width: 20%;
-}
 
-.submitted{
-    margin-left: auto;
-    margin-right: 15px;
-}
+//.entries {
+//    height: auto;
+//}
+//
+//.entry {
+//    margin-top: 15px;
+//    height: 25px;
+//}
+//
+//.titles{
+//  display: flex;
+//  flex-direction: row;
+//  justify-content: space-between;
+//  align-items: center;
+//}
+//
+//
+//.place{
+//    width: 50px;
+//    margin-left: 15px;
+//}
+//
+//.username{
+//    width: 20%;
+//}
+//
+//.submitted{
+//    margin-left: auto;
+//    margin-right: 15px;
+//}
+//
+//.selectorLabel {
+//    font-size: 20px;
+//    margin-top: 10px;
+//}
+//
 
-.selectorLabel {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-.scroll {
-    overflow:auto;
-    height: 37vh;
-}
-
-.labelFormattingNoHover {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    padding: 5px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    margin-right: 5px;
-}
-
-.labelFormatting {
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    padding: 5px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    margin-right: 5px;
-}
-
-.labelFormatting:hover {
-    background: rgba(128, 128, 128, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    padding: 5px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    cursor:pointer;
-}
+//
+//.labelFormattingNoHover {
+//    background: rgba(255, 255, 255, 0.1);
+//    border: 1px solid rgba(255, 255, 255, 0.3);
+//    border-radius: 3px;
+//    padding: 5px;
+//    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+//    backdrop-filter: blur(10px);
+//    -webkit-backdrop-filter: blur(10px);
+//    margin-right: 5px;
+//}
+//
+//.labelFormatting {
+//    background: rgba(0, 0, 0, 0.1);
+//    border: 1px solid rgba(255, 255, 255, 0.3);
+//    border-radius: 3px;
+//    padding: 5px;
+//    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+//    backdrop-filter: blur(10px);
+//    -webkit-backdrop-filter: blur(10px);
+//    margin-right: 5px;
+//}
+//
+//.labelFormatting:hover {
+//    background: rgba(128, 128, 128, 0.1);
+//    border: 1px solid rgba(255, 255, 255, 0.3);
+//    border-radius: 3px;
+//    padding: 5px;
+//    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+//    backdrop-filter: blur(10px);
+//    -webkit-backdrop-filter: blur(10px);
+//    cursor:pointer;
+//}
