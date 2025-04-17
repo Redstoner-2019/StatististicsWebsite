@@ -1,51 +1,65 @@
 <div class="center">
-    <div class="form statsMain">
-        <h1 class="center-horizontal">{{gameDisplay}}</h1>
-        <h2 class="center-horizontal">{{challengeDisplay}}</h2>
+  <div class="form statsMain">
+    <div class="mainContent">
+      <div class="form title">
+        <h4 class="center-horizontal">{{ gameDisplay }}</h4>
+        <h4 class="center-horizontal">{{ challengeDisplay }}</h4>
+      </div>
 
-        <div class="form definitions">
-            <div class="subSelection">
-                <label class="selectorLabel" for="version">Choose a Version: </label>
-                <select id="version" [(ngModel)]="version" class="form selector">
-                    <option *ngFor="let option of versions" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-            <div class="subSelection">
-                <label class="selectorLabel" for="challenge">Choose a Challenge: </label>
-                <select id="challenge" [(ngModel)]="challengeDisplay" class="form selector">
-                    <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-            <div class="subSelection">
-                <label class="selectorLabel" for="sorting">Choose a sorting: </label>
-                <select id="sorting" [(ngModel)]="sort" class="form selector">
-                    <option *ngFor="let option of sortings" [value]="option">{{ option }}</option>
-                </select>
-            </div>
-            <button (click)="updateData()">Apply</button>
+      <div class="form definitions">
+        <div class="subSelection">
+          <label class="selectorLabel" for="version">Choose a Version: </label>
+          <select id="version" [(ngModel)]="version" class="form selector">
+            <option *ngFor="let option of versions" [value]="option">{{ option }}</option>
+          </select>
         </div>
+
+        <div class="subSelection">
+          <label class="selectorLabel" for="challenge">Choose a Challenge: </label>
+          <select id="challenge" [(ngModel)]="challengeDisplay" class="form selector">
+            <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <div class="subSelection">
+          <label class="selectorLabel" for="sorting">Choose a sorting: </label>
+          <select id="sorting" [(ngModel)]="sort" class="form selector">
+            <option *ngFor="let option of sortings" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <button (click)="updateData()">Apply</button>
+
         <div>
-            <div class="form entries scroll">
+          <div class="form entries scroll">
             <div class="titles">
-                <h3 class="place">#</h3>
-                <h3 class="username">Username</h3>
-                <h3>Record</h3>
-                <h3 class="submitted">Submitted</h3>
+              <h3 class="place">#</h3>
+              <h3 class="username">Username</h3>
+              <h3>Record</h3>
+              <h3 class="submitted">Submitted</h3>
             </div>
-            <div class="">
-                <div *ngFor="let entry of entries">
-                    <app-stat-entry class="entry" [place]="[entry.place]" [username]="[entry.username]" [value]="[entry.value]" [date]="[entry.date]"></app-stat-entry>
-                </div> 
+
+            <div>
+              <div *ngFor="let entry of entries">
+                <app-stat-entry
+                  class="entry"
+                  [place]="[entry.place]"
+                  [username]="[entry.username]"
+                  [value]="[entry.value]"
+                  [date]="[entry.date]"
+                ></app-stat-entry>
+              </div>
             </div>
+          </div>
         </div>
-        </div>
-        
 
         <div class="form" style="margin-top: 15px;">
-            <label (click)="pageMinus()" class="labelFormatting">-</label>
-            <label class="labelFormattingNoHover">{{page+1}}</label>
-            <label (click)="pagePlus()" class="labelFormatting">+</label>
-            <label class="labelFormatting">{{maxpages}}</label>
+          <label (click)="pageMinus()" class="labelFormatting">-</label>
+          <label class="labelFormattingNoHover">{{ page + 1 }}</label>
+          <label (click)="pagePlus()" class="labelFormatting">+</label>
+          <label class="labelFormatting">{{ maxpages }}</label>
         </div>
+      </div>
     </div>
+  </div>
 </div>
