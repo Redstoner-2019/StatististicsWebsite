@@ -25,6 +25,7 @@ export class ChallengeSelectorComponent {
   challenges: Challenge[] = [];
 
   filteredItems(): Challenge[] {
+    console.log(this.challenges);
     //return [];
     return this.challenges;
     /*return this.challenges.filter(challenge =>

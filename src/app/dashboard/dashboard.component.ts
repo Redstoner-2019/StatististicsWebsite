@@ -3,7 +3,6 @@ import { AppComponent } from '../app.component';
 import { ThemeSelectorComponent } from "../theme-selector/theme-selector.component";
 import { DashboardViewComponent } from '../dashboard-view/dashboard-view.component';
 import { GameSelectorComponent } from '../game-selector/game-selector.component';
-import { ChallengeSelectorComponent } from '../challenge-selector/challenge-selector.component';
 import { CommonModule } from '@angular/common';
 import { DeveloperComponent } from "../developer/developer.component";
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ThemeSelectorComponent, DashboardViewComponent, GameSelectorComponent, ChallengeSelectorComponent, DeveloperComponent],
+  imports: [CommonModule, ThemeSelectorComponent, DashboardViewComponent, GameSelectorComponent, DeveloperComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
