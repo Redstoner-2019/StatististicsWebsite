@@ -4,6 +4,7 @@ import { GameObjectComponent } from '../game-object/game-object.component';
 import { CommonModule } from '@angular/common';
 import { delay } from 'rxjs';
 import { HttpClientModule, HttpClient, HttpHeaders  } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -54,12 +55,14 @@ export class DashboardViewComponent {
         test:"test"
     }
 
+    if(token == null) token = "";
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'token': token
     });
 
-    this.http.post("http://localhost:8082/stats/game/getAll", request, {headers} ).subscribe(
+    this.http.post(environment.statsUrl + "/stats/game/getAll", request, {headers} ).subscribe(
       (data) => {
         this.games = [];
         const result:any = data;
@@ -84,15 +87,14 @@ export class DashboardViewComponent {
           if(this.visibleGames.length === 0) this.loadingmsg = "No games found."
       },
       (error) => {
-        console.log(error);
-
-        this.games = [
-          /*{ name: 'Minecraft', players: 0, id:"uuid"},
-          { name: 'Minecraft 1', players: 1, id:"uuid"},
-          { name: 'Minecraft 2', players: 2, id:"uuid"},*/
-        ];
-
-        this.loadingmsg = "No games found."
+        if(error.status === 403) {
+          this.loadingmsg = "Not logged in. Please login to view data."
+        } else if(error.status === 0) {
+          this.loadingmsg = "Connection failed."
+        } else {
+          this.loadingmsg = "An error occured."
+          console.log(error);
+        }
 
         this.containerWidth = this.containerDiv.nativeElement.clientWidth;
         const itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);
@@ -104,7 +106,7 @@ export class DashboardViewComponent {
 
     }
 
-    this.http.post("http://localhost:8082/stats/recentRuns/getAll", request, {headers} ).subscribe(
+    this.http.post(environment.statsUrl + "/stats/recentRuns/getAll", request, {headers} ).subscribe(
       (data) => {
         this.runs = [];
         const result:any = data;
@@ -129,15 +131,14 @@ export class DashboardViewComponent {
           if(this.visibleRuns.length === 0) this.loadingmsgrun = "No games found."
       },
       (error) => {
-        console.log(error);
-
-        /*this.runs = [
-          { name: 'Run', scoreText: 0, id:"uuid"},
-          { name: 'Run 1', scoreText: 1, id:"uuid"},
-          { name: 'Run 2', scoreText: 2, id:"uuid"},
-        ];*/
-
-        this.loadingmsgrun = "No runs found."
+        if(error.status === 403) {
+          this.loadingmsgrun = "Not logged in. Please login to view data."
+        } else if(error.status === 0) {
+          this.loadingmsgrun = "Connection failed."
+        } else {
+          this.loadingmsgrun = "An error occured."
+          console.log(error);
+        }
 
         this.containerWidth = this.containerDiv.nativeElement.clientWidth;
         const itemsThatFit = Math.floor(this.containerWidth / this.itemWidth);

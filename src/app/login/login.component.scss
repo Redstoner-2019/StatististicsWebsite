@@ -6,6 +6,13 @@
     padding: 15px 15px;
 }
 
+.gradient-text {
+    background: linear-gradient(to right, black, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+
 @media only screen and (max-width: 500px) {
     .loginForm{
         width: 80vw;
