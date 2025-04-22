@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ChallengeObjectComponent } from "../challenge-object/challenge-object.component";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-challenge-selector',
@@ -49,7 +50,7 @@ export class ChallengeSelectorComponent {
         'token': token
       });
   
-      const apiUrl = 'http://localhost:8082/stats/challenges/getAll';
+      const apiUrl = environment.statsUrl + '/stats/challenges/getAll';
   
       this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
         const result: any = response;

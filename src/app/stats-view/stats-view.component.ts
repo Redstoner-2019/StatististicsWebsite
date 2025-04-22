@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StatEntryComponent } from "../stat-entry/stat-entry.component";
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-stats-view',
@@ -82,7 +83,7 @@ export class StatsViewComponent {
       'token': token
     });
 
-    let apiUrl = 'http://localhost:8082/stats/challenges/getAll';
+    let apiUrl = environment.statsUrl + '/stats/challenges/getAll';
 
     this.challenges = [];
 
@@ -107,7 +108,7 @@ export class StatsViewComponent {
         }
       }
 
-      apiUrl = 'http://localhost:8082/stats/game/get';
+      apiUrl = environment.statsUrl + '/stats/game/get';
 
       this.http.post(apiUrl, packetGame, {headers}).subscribe((response) => {
         const result: any = response;
@@ -118,7 +119,7 @@ export class StatsViewComponent {
         "uuid": this.challenge
       };
 
-      apiUrl = 'http://localhost:8082/stats/challenges/get';
+      apiUrl = environment.statsUrl + '/stats/challenges/get';
 
       this.http.post(apiUrl, packetChallenge, {headers}).subscribe((response) => {
         const result: any = response;
@@ -136,7 +137,7 @@ export class StatsViewComponent {
         "version": this.version
       };
 
-      apiUrl = 'http://localhost:8082/stats/challengeEntry/getAllSorted';
+      apiUrl = environment.statsUrl + '/stats/challengeEntry/getAllSorted';
 
       this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
         const result: any = response;

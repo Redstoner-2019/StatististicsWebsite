@@ -18,7 +18,7 @@ export class LoginComponent {
   isError = false;
   loginButtonText = "Login";
   errorText = "An error occured";
-  apiUrl = 'http://158.220.105.209:8080/login';
+  apiUrl = 'https://auth.redstonerdev.io/login';
 
   constructor(private http: HttpClient, private router: Router, app: AppComponent, private api: ApiService) {
     app.update();

@@ -22,7 +22,7 @@ export class SignupComponent {
   signupButtonText = "Sign Up";
   errorText = "An error occured";
 
-  apiUrl = 'http://158.220.105.209:8080/user/create';
+  apiUrl = 'https://auth.redstonerdev.io/user/create';
 
   signUp(username: string, displayname: string, email:string, password: string, confirmPassword: string){
     console.log(username + " - " + password);

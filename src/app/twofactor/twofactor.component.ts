@@ -20,7 +20,7 @@ export class TwofactorComponent implements OnInit{
   isDisabled = false;
   authenticateButtonText = "Authenticate";
 
-  apiUrl = 'http://158.220.105.209:8080/';
+  apiUrl = 'https://auth.redstonerdev.io/';
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private app: AppComponent) {
     app.update();

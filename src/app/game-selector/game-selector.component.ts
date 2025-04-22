@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameObjectComponent } from '../game-object/game-object.component';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-game-selector',
@@ -26,7 +27,7 @@ export class GameSelectorComponent {
       'token': token
     });
 
-    const apiUrl = 'http://localhost:8082/stats/game/getAll';
+    const apiUrl = environment.statsUrl + '/stats/game/getAll';
 
     this.http.post(apiUrl, packet, {headers}).subscribe((response) => {
       const result: any = response;
