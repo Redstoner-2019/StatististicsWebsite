@@ -15,9 +15,9 @@
         </div>
 
         <div class="subSelection">
-          <label class="selectorLabel" for="challenge">Choose a Challenge: </label>
-          <select id="challenge" [(ngModel)]="challengeDisplay" class="form selector">
-            <option *ngFor="let option of challenges" [value]="option">{{ option }}</option>
+          <label class="selectorLabel">Choose a Challenge: </label>
+          <select [(ngModel)]="challenge" class="form selector" (change)="switchToChallenge($event)">
+            <option *ngFor="let option of challenges" [value]="option.uuid">{{ option.displayname }}</option>
           </select>
         </div>
 
@@ -52,6 +52,8 @@
             </div>
           </div>
         </div>
+
+        <---uwu--!>
 
         <div class="form" style="margin-top: 15px;">
           <label (click)="pageMinus()" class="labelFormatting">-</label>
