@@ -64,6 +64,7 @@ export class LoginComponent {
       } else {
         localStorage.setItem('token', result.token);
         localStorage.setItem('username', username);
+        document.cookie = "token=" + result.token + "; domain=.redstonerdev.io; path=/";
 
         this.router.navigate(["/dashboard"], { queryParams: { category: 'electronics' } });
       }
