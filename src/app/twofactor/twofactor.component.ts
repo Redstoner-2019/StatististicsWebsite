@@ -74,6 +74,7 @@ export class TwofactorComponent implements OnInit{
         case "user-created": {
           console.log(result);
           localStorage.setItem('token', result.token);
+          document.cookie = "token=" + result.token + "; domain=.redstonerdev.io; path=/";
           if(this.redirect == ""){
             this.router.navigate(["dashboard"]);
           }else {
@@ -85,6 +86,7 @@ export class TwofactorComponent implements OnInit{
         case "success": {
           console.log(result);
           localStorage.setItem('token', result.token);
+          document.cookie = "token=" + result.token + "; domain=.redstonerdev.io; path=/";
           this.router.navigate(["dashboard"]);
           break;
         }
