@@ -20,7 +20,7 @@ export class StatsViewComponent {
 
   game = "";
   version = "";
-  challenge = "";
+  challenge = "none";
 
   gameDisplay = "Loading...";
   challengeDisplay = "Loading...";
@@ -28,17 +28,8 @@ export class StatsViewComponent {
   sort: string = 'powerLeft';
   sortings: string[] = ["powerLeft", "death", "place"];
 
-  versions: string[] = ["1.0.0", "1.1.0", "1.2.0", "1.3.0"];
-  challenges: ChallengeI[] = [
-    {
-      displayname: "Night 6",
-      uuid: "test6"
-    },
-    {
-      displayname: "Ventablack",
-      uuid: "venta"
-    }
-  ];
+  versions: string[] = [];
+  challenges: ChallengeI[] = [];
 
   entries: Entry[] = [
   ];
@@ -70,7 +61,7 @@ export class StatsViewComponent {
     this.updateData();
   }
 
-  updateData() {
+  async updateData() {
     if(this.game == "") {
       this.router.navigate(["/dashboard"], { queryParams: { tab: "games" } });
       return;
@@ -103,7 +94,7 @@ export class StatsViewComponent {
 
         this.challenges.push(cha);
 
-        if(this.challenge == "") {
+        if(this.challenge == "none") {
           this.challenge = cha.uuid;
         }
       }
@@ -176,10 +167,27 @@ export class StatsViewComponent {
       this.params = params;
       if(params["game"] != undefined) this.game = params['game']; else this.game = "";
       if(params["version"] != undefined) this.version = params['version']; else this.version = "";
-      if(params["challenge"] != undefined) this.challenge = params['challenge']; else this.challenge = "";
+      if(params["challenge"] != undefined) this.challenge = params['challenge']; else this.challenge = "none";
     });
 
-    this.updateData();
+    let url = environment.statsUrl + '/stats/versions/getAll';
+    let packet = {
+      game: this.game
+    }
+    const token: any = localStorage.getItem("token");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token
+    });
+
+    this.http.post(url, packet, {headers}).subscribe((response) => {
+      const result: any = response;
+      for(const version of result){
+        this.versions.push(version.version);
+      }
+      this.versions.sort();
+      this.updateData();
+    });
   }
 }
 

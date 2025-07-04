@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { HttpClientModule, HttpClient  } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -13,8 +13,15 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class SignupComponent {
 
-   constructor(private http: HttpClient, private router: Router, app: AppComponent) {
+  redirect = "";
+
+   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, app: AppComponent) {
       app.update();
+      this.route.queryParams.subscribe(params => {
+        this.redirect = params['redirect'];
+        //const redirectUrl = encodeURIComponent(this.redirect);
+        //this.router.navigate(["/2fa"], { queryParams: { id: "test", type:"signup", redirect: redirectUrl } });
+      });
     }
 
   isDisabled = false;
@@ -25,6 +32,13 @@ export class SignupComponent {
   apiUrl = 'https://auth.redstonerdev.io/user/create';
 
   signUp(username: string, displayname: string, email:string, password: string, confirmPassword: string){
+          console.log(this.redirect)
+          const redirectUrl = encodeURIComponent(this.redirect);
+          console.log(redirectUrl)
+          this.router.navigate(["/2fa"], { queryParams: { id: "test", type:"signup", redirect: redirectUrl } });
+
+    if(true) return;
+
     console.log(username + " - " + password);
     this.isDisabled = !this.isDisabled;
     this.signupButtonText = this.isDisabled ? 'Signing Up...' : 'Sign Up';
@@ -59,7 +73,14 @@ export class SignupComponent {
         this.isDisabled = false;
         this.signupButtonText = "Sign Up";
       } else {
-        this.router.navigate(["/2fa"], { queryParams: { id: result["confirm-id"], type:"signup" } });
+        if(this.redirect == ""){
+          this.router.navigate(["/2fa"], { queryParams: { id: result["confirm-id"], type:"signup" } });
+        } else {
+          console.log(this.redirect)
+          const redirectUrl = encodeURIComponent(this.redirect);
+          console.log(redirectUrl)
+          this.router.navigate(["/2fa"], { queryParams: { id: result["confirm-id"], type:"signup", redirect: redirectUrl } });
+        }
       }
     });
 

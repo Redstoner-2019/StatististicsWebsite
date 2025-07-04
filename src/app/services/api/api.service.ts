@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { lastValueFrom } from 'rxjs';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { firstValueFrom  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  get(url: string): Observable<any> {
-    console.log("http " + this.http);
-    return this.http.get(url);
-  }
+  async request<T>(
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
+    url: string,
+    body: any = null,
+    headers: { [key: string]: string } = {}
+  ): Promise<T> {
+    const httpHeaders = new HttpHeaders(headers);
 
-  async post(url: string, postData: any): Promise<any> {
-    /*let test: Promise<Object> = this.http.get(url);
-    test.then(value => {
-      console.log(value);
-    }).catch(error => {
-      console.error(error);
-    });
-    return await lastValueFrom(this.http.post(url, postData));*/
-  }
+    const options = {
+      headers: httpHeaders,
+      body: body,
+    };
 
-  updatePost(url: string, postData: any): Observable<any> {
-    return this.http.put(url, postData);
-  }
-
-  deletePost(url: string, id: number): Observable<any> {
-    return this.http.delete(`${url}/${id}`);
+    const observable = this.http.request<T>(method, url, options);
+    return await firstValueFrom(observable);
   }
 }

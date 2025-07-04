@@ -19,6 +19,7 @@ export class TwofactorComponent implements OnInit{
   errorText = "";
   isDisabled = false;
   authenticateButtonText = "Authenticate";
+  redirect = "";
 
   apiUrl = 'https://auth.redstonerdev.io/';
 
@@ -73,7 +74,12 @@ export class TwofactorComponent implements OnInit{
         case "user-created": {
           console.log(result);
           localStorage.setItem('token', result.token);
-          this.router.navigate(["dashboard"]);
+          if(this.redirect == ""){
+            this.router.navigate(["dashboard"]);
+          }else {
+            this.redirect = this.redirect.replace("%TOKEN%", result.token);
+            window.location.href = this.redirect;
+          }
           break;
         }
         case "success": {
@@ -99,7 +105,7 @@ export class TwofactorComponent implements OnInit{
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.params = params;
-      console.log(this.params);
+      this.redirect= decodeURIComponent(params['redirect']);
     });
   }
 }
