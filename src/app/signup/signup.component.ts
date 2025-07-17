@@ -32,12 +32,12 @@ export class SignupComponent {
   apiUrl = 'https://auth.redstonerdev.io/user/create';
 
   signUp(username: string, displayname: string, email:string, password: string, confirmPassword: string){
-          console.log(this.redirect)
-          const redirectUrl = encodeURIComponent(this.redirect);
-          console.log(redirectUrl)
-          this.router.navigate(["/2fa"], { queryParams: { id: "test", type:"signup", redirect: redirectUrl } });
+          //console.log(this.redirect)
+          //const redirectUrl = encodeURIComponent(this.redirect);
+          //console.log(redirectUrl)
+          //this.router.navigate(["/2fa"], { queryParams: { id: "test", type:"signup", redirect: redirectUrl } });
 
-    if(true) return;
+    //if(true) return;
 
     console.log(username + " - " + password);
     this.isDisabled = !this.isDisabled;

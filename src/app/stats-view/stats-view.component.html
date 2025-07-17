@@ -16,6 +16,12 @@
                     <option *ngFor="let option of sortings" [value]="option">{{ option }}</option>
                 </select>
             </div>
+            <div class="subSelection">
+                <label class="selectorLabel" for="challenge">Choose a challenge: </label>
+                <select id="sorting" [(ngModel)]="challenge" class="form selector" (change)="updateData()">
+                    <option *ngFor="let option of challenges" [value]="option">{{ option.displayname }}</option>
+                </select>
+            </div>
             <button (click)="updateData()">Apply</button>
         </div>
         <div>

@@ -19,8 +19,11 @@ export class StatsViewComponent {
   params: any | null = {};
 
   game = "";
-  version = "";
-  challenge = "none";
+  version = "1.0.0";
+  challenge: ChallengeI = {
+    displayname: "",
+    uuid: ""
+  };
 
   gameDisplay = "Loading...";
   challengeDisplay = "Loading...";
@@ -53,13 +56,13 @@ export class StatsViewComponent {
     this.updateData();
   }
 
-  switchToChallenge(event: Event): void {
+  /*switchToChallenge(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
 
     this.challenge = selectedValue.toString();
     this.updateData();
-  }
+  }*/
 
   async updateData() {
     if(this.game == "") {
@@ -83,6 +86,8 @@ export class StatsViewComponent {
       "version": this.version
     };
 
+    console.log(packetAllChallenges);
+
     this.http.post(apiUrl, packetAllChallenges, {headers}).subscribe((response) => {
       const result: any = response;
 
@@ -92,11 +97,11 @@ export class StatsViewComponent {
           uuid: challenge.id
         };
 
-        this.challenges.push(cha);
+        if(this.challenges.length < 2) this.challenges.push(cha);
 
-        if(this.challenge == "none") {
-          this.challenge = cha.uuid;
-        }
+        //if(this.challenge.uuid == "") {
+        //  this.challenge = cha;
+        //}
       }
 
       apiUrl = environment.statsUrl + '/stats/game/get';
@@ -107,7 +112,7 @@ export class StatsViewComponent {
       });
 
       let packetChallenge = {
-        "uuid": this.challenge
+        "uuid": this.challenge.uuid
       };
 
       apiUrl = environment.statsUrl + '/stats/challenges/get';
@@ -124,9 +129,13 @@ export class StatsViewComponent {
         "ascending": true,
         "sortBy": this.sort,
         "game": this.game,
-        "challenge": this.challenge,
+        "challenge": this.challenge.uuid,
         "version": this.version
       };
+
+      if(this.sort == "powerLeft") {
+        packet.ascending = false;
+      }
 
       apiUrl = environment.statsUrl + '/stats/challengeEntry/getAllSorted';
 
@@ -167,7 +176,10 @@ export class StatsViewComponent {
       this.params = params;
       if(params["game"] != undefined) this.game = params['game']; else this.game = "";
       if(params["version"] != undefined) this.version = params['version']; else this.version = "";
-      if(params["challenge"] != undefined) this.challenge = params['challenge']; else this.challenge = "none";
+      if(params["challenge"] != undefined) this.challenge = params['challenge']; else this.challenge = {
+        displayname: "",
+        uuid: ""
+      };
     });
 
     let url = environment.statsUrl + '/stats/versions/getAll';

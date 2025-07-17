@@ -46,6 +46,16 @@
         <br>
         <div class="form">
             <h3 class="center-horizontal">Challenge Settings</h3>
+            <div class="form">
+                <h3 class="input">Update Game</h3>
+                <div>
+                    <input type="search" class="input" placeholder="Game UUID*" [(ngModel)]="gameUUID">
+                    <input type="search" class="input" placeholder="Version Name*" [(ngModel)]="versionName">
+                    <input type="checkbox" class="input" [(ngModel)]="versionEnabled">
+                </div>
+                <button [ngClass]="{ 'disabled': !buttonsEnabled.versionChallenge}" class="disabled input" (click)="onChallengeVersionGet()">Get</button>
+                <button [ngClass]="{ 'disabled': !buttonsEnabled.versionChallenge}" class="disabled input" (click)="onChallengeVersionUpdate()">Update</button>
+            </div>
         </div>
         <br>
         <div class="form">

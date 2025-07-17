@@ -50,6 +50,8 @@ export class TwofactorComponent implements OnInit{
     }
     }
 
+    console.log(this.redirect.replace("%TOKEN%", "test"));
+
     this.http.post(this.apiUrl, request).subscribe((response) => {
       const result: any = response;
       switch (result.message) {
@@ -87,7 +89,12 @@ export class TwofactorComponent implements OnInit{
           console.log(result);
           localStorage.setItem('token', result.token);
           document.cookie = "token=" + result.token + "; domain=.redstonerdev.io; path=/";
-          this.router.navigate(["dashboard"]);
+          if(this.redirect == ""){
+            this.router.navigate(["dashboard"]);
+          }else {
+            this.redirect = this.redirect.replace("%TOKEN%", result.token);
+            window.location.href = this.redirect;
+          }
           break;
         }
         default: {
