@@ -97,7 +97,7 @@ export class StatsViewComponent {
           uuid: challenge.id
         };
 
-        if(this.challenges.length < 2) this.challenges.push(cha);
+        this.challenges.push(cha);
 
         //if(this.challenge.uuid == "") {
         //  this.challenge = cha;
